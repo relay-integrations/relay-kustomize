@@ -14,6 +14,9 @@ ni cluster config
 NS="$(ni get -p {.namespace})"
 [ -n "${NS}" ] && KUBECTL_ARGS+=( "--namespace=${NS}" )
 
+PRUNE="$( ni get | jq -r 'try .prune.labelSelectors | select(length > 0) | to_entries | map("\( .key )=\( .value )") | join(",")' )"
+[ -n "${PRUNE}" ] && KUBECTL_ARGS+=( "--prune" "--selector=${PRUNE}" )
+
 WORKSPACE_PATH="$(ni get -p {.path})"
 
 GIT="$(ni get -p {.git})"

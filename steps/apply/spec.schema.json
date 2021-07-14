@@ -49,6 +49,19 @@
       "description": "The namespace to run the command under.",
       "default": "default"
     },
+    "prune": {
+      "type": "object",
+      "description": "Selectors to identify objects to prune.",
+      "properties": {
+        "labelSelectors": {
+          "type": "object",
+          "description": "A key-value map of label selectors to use to prune existing resources.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "git": {
       "type": "object",
       "description": "A map of git configuration. If you're using HTTPS, only name and repository are required.",
